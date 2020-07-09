@@ -1,0 +1,42 @@
+package com.hms.controllers;
+
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.hms.beans.Patient;
+import com.hms.services.PatientService;
+
+@Controller
+public class BillController {
+
+	/**
+	 * Controller to manage final billing
+	 * 
+	 */
+	@Autowired
+	PatientService service;
+	
+	/**
+	 * 
+	 * 
+	 * @param bill
+	 * @param id
+	 * @param model
+	 * @return 
+	 */
+	@PostMapping(value = "/bilingConfirmed")
+	public String confirmbilling(@RequestParam("totalBill") int bill, @RequestParam("patientId") long id, Model model) {
+		Patient patient = service.searchPatientById(id);
+		patient.setBillPaid(bill);
+		Date date = new Date();
+		patient.setStatus("Discharged");
+		patient.setDischargedDate(date.toString());
+		model.addAttribute("message", "Money Paid Successfully and Patient Status changed to Discharge");
+		return "profile";
+	}
+}
