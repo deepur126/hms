@@ -11,5 +11,5 @@ maven clean install
 
 check with application properties in resources for config
 
-// run spring app from main/java/HospitalManagement.java
+// run spring app from src/main/java/*/HospitalManagement*.java
 
