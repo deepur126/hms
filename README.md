@@ -8,3 +8,8 @@ MySQL - 8v
 
 #for dependencies
 maven clean install 
+
+check with application properties in resources for config
+
+// run spring app from main/java/HospitalManagement.java
+
